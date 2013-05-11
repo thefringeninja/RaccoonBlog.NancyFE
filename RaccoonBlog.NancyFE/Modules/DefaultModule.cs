@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Nancy;
+using Nancy.Responses;
 using RaccoonBlog.NancyFE.Model;
 using RaccoonBlog.NancyFE.ViewModels;
 using Raven.Client;
@@ -62,6 +63,15 @@ namespace RaccoonBlog.NancyFE.Modules
                 if (post.PublishAt > DateTime.UtcNow)
                 {
                     return 403;
+                }
+
+                var slug = post.Title.Slugify();
+
+                if (slug != (string) p.slug)
+                {
+                    return Response.AsRedirect(
+                        "/" + (string) p.id + "/" + slug,
+                        RedirectResponse.RedirectType.Permanent);
                 }
 
                 return View[new BlogPostViewModel(post)];
