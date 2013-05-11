@@ -123,9 +123,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CassetteBundleConfiguration.cs" />
+    <Compile Include="DocumentStoreExtensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="HexExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
+    <Compile Include="Model\PostComments.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Modules\CassetteModule.cs" />
     <Compile Include="Model\QueryExtensions.cs" />

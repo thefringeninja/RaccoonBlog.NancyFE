@@ -2,6 +2,7 @@
 using System.Configuration;
 using Nancy;
 using Nancy.TinyIoc;
+using RaccoonBlog.NancyFE.Model;
 using RaccoonBlog.NancyFE.Startup;
 using Raven.Client;
 using Raven.Client.Document;
@@ -15,6 +16,7 @@ namespace RaccoonBlog.NancyFE.Bootstrapper
         {
             CassetteStartup.OptimizeOutput = true;
         }
+
         private readonly Lazy<IDocumentStore> documentStoreLazy = new Lazy<IDocumentStore>(() =>
         {
             var documentStore = new DocumentStore();
@@ -22,6 +24,8 @@ namespace RaccoonBlog.NancyFE.Bootstrapper
             documentStore.Initialize();
 
             //IndexCreation.CreateIndexes(typeof(Bootstrapper).Assembly, documentStore);
+
+            documentStore.DeleteAll<PostComments>();
 
             return documentStore;
         });
