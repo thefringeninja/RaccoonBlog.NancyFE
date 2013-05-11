@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="ftp://ftp.braganca.name/www.braganca.name/web/content/" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Rackspace" publishMethod="FTP" replaceMatchingFiles="True" userName="captainramen" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAMq7STZRKXkC7G6XWbPJovQAAAAACAAAAAAAQZgAAAAEAACAAAAA5Cr8nUhSi5a963MdmRDXcG8XWiTMqupcwEVDm5spkpgAAAAAOgAAAAAIAACAAAAAmMMW4InzKuzPy60Xh+PtgdeYp2dPwBRDhI3yXSnz42yAAAADfnWDSVoGRUSJT1aaasXKT6fyOAGJaaCwM+XvN3cvm6kAAAACHc0HRiIH7RmiwNGXLXh8hqaZw45NnwuM+vY4V7rCiyu2PRpH1ucYnOLQf2AQ7xxuRHAcUfixS2Ats1qE3ppQu" SelectedForPublish="True">
+    <file relUrl="bin/Nancy.ViewEngines.Razor.dll" publishTime="06/23/2012 15:04:23" />
+    <file relUrl="bin/Nancy.Hosting.Aspnet.dll" publishTime="06/23/2012 15:04:12" />
+    <file relUrl="Web.config" publishTime="06/23/2012 15:49:27" />
+    <file relUrl="bin/System.Web.Razor.dll" publishTime="06/23/2012 15:04:23" />
+    <file relUrl="bin/Nancy.dll" publishTime="06/23/2012 15:04:12" />
+    <file relUrl="packages.config" publishTime="06/23/2012 15:04:24" />
+    <file relUrl="bin/RaccoonBlog.NancyFE.pdb" publishTime="06/23/2012 15:53:12" />
+    <file relUrl="bin/RaccoonBlog.NancyFE.dll" publishTime="06/23/2012 15:53:13" />
+  </publishProfile>
+</publishData>

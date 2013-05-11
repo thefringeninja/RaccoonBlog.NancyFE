@@ -1,0 +1,13 @@
+﻿@inherits RaccoonBlog.NancyFE.RazorView<RaccoonBlog.NancyFE.ViewModels.BlogPostsViewModel>
+
+@foreach (var post in Model.BlogPosts)
+{
+    <article>
+        <header>
+            <h2>@post.Title</h2>
+            <span class="date">@post.PublishAt.ToString("u")</span>
+        </header>
+        @Html.Raw(post.Body)
+    </article>
+    <hr />
+}

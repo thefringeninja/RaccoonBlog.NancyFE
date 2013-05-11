@@ -1,0 +1,29 @@
+﻿@using Cassette.Nancy
+@inherits NancyRazorViewBase<dynamic>
+@{
+    Bundles.Reference("~/content/css/metro.css");
+}              
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        @Bundles.RenderStylesheets()        
+        <style type="text/css">
+            body {
+                margin: 12px;
+            }
+
+            body * { background-color: white; }
+        </style>
+    </head>
+    <body class="blackbg">
+        <section class="whitebg" style="padding: 12px">
+            <section>
+                <header><h1 class="black">Raccoon + Nancy = Teh Awesome</h1></header>
+            </section>
+            <section>
+                @RenderBody()
+            </section>
+        </section>
+    </body>
+</html>

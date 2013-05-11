@@ -1,0 +1,8 @@
+﻿@inherits RaccoonBlog.NancyFE.RazorView<RaccoonBlog.NancyFE.ViewModels.BlogPostViewModel>
+<article>
+    <header>
+        <h2>@Model.Post.Title</h2>
+        <span class="date">@Model.Post.PublishAt.ToString("u")</span>
+    </header>
+    @Html.Raw(@Model.Post.Body)
+</article>
