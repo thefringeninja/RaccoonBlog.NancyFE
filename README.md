@@ -15,3 +15,8 @@ Not really a fan of MVC or the MVC pattern frankly. Just don't jive with the way
 Also, it seemed as if it would be too much effort to get the skin / theme I wanted. I want to maximize performance within a tight budget. You can easliy configure cloudfront to use the blog engine as its origin server. Then you leverage Cassette's html rewriting idea and BAM - huge reduction in remote calls.
 
 Once you start walking the SDHP, you can't go back!
+
+What happened to Comments?
+===================
+
+I don't feel like configuring an anti comment spam service or CAPTCHA; It's way less effort to let DISQUS manage that for me. Plus I can now get rid of the PostComments document collection.
