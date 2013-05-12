@@ -53,7 +53,7 @@ namespace RaccoonBlog.NancyFE.Startup
         public void Initialize(IPipelines pipelines)
         {
             Initialize();
-            pipelines.AfterRequest.AddItemToEndOfPipeline(RewriteResponseContents);
+            //pipelines.AfterRequest.AddItemToEndOfPipeline(RewriteResponseContents);
         }
 
         #endregion
