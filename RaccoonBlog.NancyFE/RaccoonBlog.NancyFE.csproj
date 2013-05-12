@@ -133,6 +133,7 @@
     <Compile Include="Model\QueryExtensions.cs" />
     <Compile Include="Startup\CassetteStartup.cs" />
     <Compile Include="IProvideBundleCollections.cs" />
+    <Compile Include="ViewModels\BlogPostSummaryViewModel.cs" />
     <Compile Include="ViewModels\BlogPostsViewModel.cs" />
     <Compile Include="Bootstrapper\Bootstrapper.cs" />
     <Compile Include="Modules\DefaultModule.cs" />

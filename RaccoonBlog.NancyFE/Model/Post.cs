@@ -12,5 +12,7 @@ namespace RaccoonBlog.NancyFE.Model
         public DateTime PublishAt { get; set; }
         public string ContentType { get; set; }
         public string AuthorId { get; set; }
+
+        public string Id { get; set; }
     }
 }

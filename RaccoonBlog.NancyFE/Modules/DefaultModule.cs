@@ -27,29 +27,33 @@ namespace RaccoonBlog.NancyFE.Modules
                 }
 
                 var posts = session.Query<Post>().Current()
-                                        .Skip(page*PageSize)
-                                        .Take(PageSize)
-                                        .ToList();
+                                   .Skip(page*PageSize)
+                                   .Take(PageSize)
+                                   .ToList();
 
                 if (false == posts.Any())
                 {
                     return 404;
                 }
-                return View[new BlogPostsViewModel(posts)];
+
+                return View[new BlogPostsViewModel(posts, post => session.LoadIncluded<User>(post.AuthorId))];
             };
 
             Get["/tagged/{tag}"] = p =>
             {
-                var posts = session.Query<Post>().Current().Tagged((string) p.tag)
-                                        .Take(PageSize)
-                                        .ToArray();
-                return View[new BlogPostsViewModel(posts)];
+                var posts = session.Query<Post>().Current()
+                                   .Tagged((string) p.tag)
+                                   .Take(PageSize)
+                                   .ToArray();
+                return View[new BlogPostsViewModel(posts, post => session.LoadIncluded<User>(post.AuthorId))];
             };
 
             Get["/{id}/{slug}"] = p =>
             {
-                Post post = session.Load<Post>("posts/" + p.id);
-
+                Post post = session
+                    .Include<Post>(x => x.AuthorId)
+                    .Load<Post>("posts/" + p.id);
+                
                 if (post == null)
                 {
                     return 404;
@@ -74,7 +78,9 @@ namespace RaccoonBlog.NancyFE.Modules
                         RedirectResponse.RedirectType.Permanent);
                 }
 
-                return View[new BlogPostViewModel(post)];
+                var author = session.LoadIncluded<User>(post.AuthorId);
+                
+                return View[new BlogPostViewModel(post, author)];
             };
         }
     }
