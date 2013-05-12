@@ -123,7 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CassetteBundleConfiguration.cs" />
-    <Compile Include="DocumentStoreExtensions.cs" />
+    <Compile Include="RavenStoreExtensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="HexExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />

@@ -11,5 +11,6 @@ namespace RaccoonBlog.NancyFE.Model
         public bool IsDeleted { get; set; }
         public DateTime PublishAt { get; set; }
         public string ContentType { get; set; }
+        public string AuthorId { get; set; }
     }
 }

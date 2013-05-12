@@ -2,6 +2,6 @@ namespace RaccoonBlog.NancyFE.Model
 {
     public class User
     {
-        public string FullName { get; set; }
+        public string TwitterNick { get; set; }
     }
 }

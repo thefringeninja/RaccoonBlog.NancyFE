@@ -1,22 +1,29 @@
 using System;
 using System.Linq;
+using Raven.Client;
+using Raven.Client.Linq;
 
 namespace RaccoonBlog.NancyFE.Model
 {
     public static class QueryExtensions
     {
-        public static IQueryable<Post> Current(this IQueryable<Post> posts)
+        public static IRavenQueryable<Post> Current(this IRavenQueryable<Post> posts)
         {
-            return from post in posts
+            return from post in posts.Customize(IncludeUsers)
                    orderby post.PublishAt
                    where false == post.IsDeleted
                          && post.PublishAt <= DateTime.UtcNow
                    select post;
         }
 
-        public static IQueryable<Post> Tagged(this IQueryable<Post> posts, string tagSlug)
+        private static void IncludeUsers(IDocumentQueryCustomization c)
         {
-            return from post in posts
+            c.Include<Post>(post => post.AuthorId);
+        }
+
+        public static IRavenQueryable<Post> Tagged(this IRavenQueryable<Post> posts, string tagSlug)
+        {
+            return from post in posts.Customize(IncludeUsers)
                    where post.TagsAsSlugs.Any(tag => tag == tagSlug)
                    select post;
         }
