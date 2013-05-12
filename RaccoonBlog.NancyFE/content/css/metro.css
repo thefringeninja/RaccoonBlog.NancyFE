@@ -125,6 +125,7 @@
 body {
     font-family: "Segoe UI","Segoe WP","Helvetica Neue",'RobotoRegular',sans-serif;
     font-size: 14px;
+    width: 960px;
 }
 
 h1, h2, h3, h4, h5, h6 {

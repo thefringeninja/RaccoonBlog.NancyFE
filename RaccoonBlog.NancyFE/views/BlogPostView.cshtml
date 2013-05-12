@@ -2,8 +2,8 @@
 <article>
     <header>
         <h2>@Model.Title</h2>
-        <time class="date">@Model.PublishAt.ToString("u")</time>
-        <a href="http://twitter.com/@Model.Author" rel="author">@Model.Author</a>
+        <address>by <a href="http://twitter.com/@Model.Author" rel="author">@Model.Author</a></address>
+        <time pubdate datetime="@Model.PublishAt.ToString("u")" class="date" >@Model.PublishAt.ToString("u")</time>
     </header>
     @Html.Raw(@Model.Body)
 </article>

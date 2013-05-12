@@ -5,7 +5,8 @@
     <article>
         <header>
             <h2><a href="/@post.Path">@post.Title</a></h2>
-            <span class="date">@post.PublishAt.ToString("u")</span>
+            <time pubdate datetime="@post.PublishAt.ToString("u")" class="date" >@post.PublishAt.ToString("u")</time>
+            <address>by <a href="http://twitter.com/@post.Author" rel="author">@post.Author</a></address>
         </header>
         @Html.Raw(post.Body)
     </article>
