@@ -10,10 +10,21 @@ namespace RaccoonBlog.NancyFE.Modules
 {
     public class DefaultModule : NancyModule
     {
+        private readonly IDocumentSession session;
         private const int PageSize = 10;
+
+        protected BlogConfig GetBlogConfig()
+        {
+            // can probably even cache this for a whole day. It will not change much.
+            using (session.Advanced.DocumentStore.AggressivelyCacheFor(TimeSpan.FromMinutes(30)))
+            {
+                return session.Load<BlogConfig>("Blog/Config");
+            }
+        }
 
         public DefaultModule(IDocumentSession session)
         {
+            this.session = session;
             // 10 most recent blog posts
             Get["/"] = _ =>
             {
@@ -36,7 +47,7 @@ namespace RaccoonBlog.NancyFE.Modules
                     return 404;
                 }
 
-                return View[new BlogPostsViewModel(posts, post => session.LoadIncluded<User>(post.AuthorId))];
+                return View[new BlogPostsViewModel(posts, GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId))];
             };
 
             Get["/tagged/{tag}"] = p =>
@@ -45,7 +56,7 @@ namespace RaccoonBlog.NancyFE.Modules
                                    .Tagged((string) p.tag)
                                    .Take(PageSize)
                                    .ToArray();
-                return View[new BlogPostsViewModel(posts, post => session.LoadIncluded<User>(post.AuthorId))];
+                return View[new BlogPostsViewModel(posts, GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId))];
             };
 
             Get["/{id}/{slug}"] = p =>
@@ -80,7 +91,7 @@ namespace RaccoonBlog.NancyFE.Modules
 
                 var author = session.LoadIncluded<User>(post.AuthorId);
                 
-                return View[new BlogPostViewModel(post, author)];
+                return View[new BlogPostViewModel(post, author, GetBlogConfig())];
             };
         }
     }

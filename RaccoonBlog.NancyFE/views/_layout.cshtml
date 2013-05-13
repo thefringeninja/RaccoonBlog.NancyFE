@@ -1,12 +1,13 @@
 ﻿@using Cassette.Nancy
-@inherits NancyRazorViewBase<dynamic>
+@inherits NancyRazorViewBase<RaccoonBlog.NancyFE.ViewModels.IPageLayout>
 @{
     Bundles.Reference("~/content/css/metro.css");
 }              
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>@Model.Title</title>
+        <meta name="description" content="@Model.Description"/>
         @Bundles.RenderStylesheets()        
         <style type="text/css">
             body {
@@ -19,10 +20,11 @@
     <body class="blackbg">
         <section class="whitebg" style="padding: 12px">
             <section>
-                <header><h1 class="black">Raccoon + Nancy = Teh Awesome</h1></header>
-            </section>
-            <section>
+                <header><h1 class="black">@Model.Subtitle</h1></header>
                 @RenderBody()
+                <footer>
+                    <small>&copy; @Model.Copyright</small>
+                </footer>
             </section>
         </section>
     </body>

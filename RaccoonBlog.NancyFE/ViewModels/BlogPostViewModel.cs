@@ -3,14 +3,17 @@ using RaccoonBlog.NancyFE.Model;
 
 namespace RaccoonBlog.NancyFE.ViewModels
 {
-    public class BlogPostViewModel
+    public class BlogPostViewModel : IPageLayout
     {
-        public BlogPostViewModel(Post post, User author)
+        private readonly BlogConfig blogConfig;
+
+        public BlogPostViewModel(Post post, User author, BlogConfig blogConfig)
         {
             Body = post.Body;
             PublishAt = post.PublishAt;
             Title = post.Title;
             Author = author.TwitterNick;
+            this.blogConfig = blogConfig;
         }
 
         public string Body { get; private set; }
@@ -18,6 +21,25 @@ namespace RaccoonBlog.NancyFE.ViewModels
 
         public string Author { get; set; }
 
+        #region IPageLayout Members
+
         public string Title { get; private set; }
+
+        string IPageLayout.Subtitle
+        {
+            get { return blogConfig.Subtitle; }
+        }
+
+        string IPageLayout.Copyright
+        {
+            get { return blogConfig.Copyright; }
+        }
+
+        string IPageLayout.Description
+        {
+            get { return blogConfig.MetaDescription; }
+        }
+
+        #endregion
     }
 }

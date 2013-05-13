@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CassetteBundleConfiguration.cs" />
+    <Compile Include="Model\BlogConfig.cs" />
     <Compile Include="RavenStoreExtensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="HexExtensions.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BlogPostViewModel.cs" />
     <Compile Include="Model\Post.cs" />
+    <Compile Include="ViewModels\IPageLayout.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="views\_layout.cshtml" />
