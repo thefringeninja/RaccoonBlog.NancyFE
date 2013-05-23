@@ -48,14 +48,24 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxMin">
-      <HintPath>..\packages\AjaxMin.4.60.4609.17023\lib\net20\AjaxMin.dll</HintPath>
+    <Reference Include="AjaxMin, Version=4.84.4790.14405, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AjaxMin.4.84.4790.14417\lib\net40\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette">
-      <HintPath>..\packages\Cassette.2.0.0\lib\net40-client\Cassette.dll</HintPath>
+    <Reference Include="Cassette, Version=2.1.0.17228, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cassette.2.1.0\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Sass">
-      <HintPath>..\packages\Cassette.Sass.2.0.0\lib\net40-client\Cassette.Sass.dll</HintPath>
+    <Reference Include="Cassette.CoffeeScript, Version=2.1.0.17228, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cassette.CoffeeScript.2.1.0\lib\net40-client\Cassette.CoffeeScript.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Less, Version=2.1.0.17228, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cassette.Less.2.1.0\lib\net40-client\Cassette.Less.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.ClientOnly">
+      <HintPath>..\packages\DotlessClientOnly.1.3.1.0\lib\dotless.ClientOnly.dll</HintPath>
     </Reference>
     <Reference Include="IronRuby">
       <HintPath>..\packages\IronRuby.1.1.3\lib\IronRuby.dll</HintPath>
@@ -65,6 +75,10 @@
     </Reference>
     <Reference Include="IronRuby.Libraries.Yaml">
       <HintPath>..\packages\IronRuby.1.1.3\lib\IronRuby.Libraries.Yaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Jurassic, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Jurassic.2.1.1\lib\Jurassic.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Dynamic">
@@ -115,7 +129,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="content\css\metro.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +168,75 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="views\BlogPostView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\bootstrap\accordion.less" />
+    <Content Include="content\bootstrap\alerts.less" />
+    <Content Include="content\bootstrap\bootstrap.less" />
+    <Content Include="content\bootstrap\breadcrumbs.less" />
+    <Content Include="content\bootstrap\button-groups.less" />
+    <Content Include="content\bootstrap\buttons.less" />
+    <Content Include="content\bootstrap\carousel.less" />
+    <Content Include="content\bootstrap\close.less" />
+    <Content Include="content\bootstrap\code.less" />
+    <Content Include="content\bootstrap\component-animations.less" />
+    <Content Include="content\bootstrap\dropdowns.less" />
+    <Content Include="content\bootstrap\forms.less" />
+    <Content Include="content\bootstrap\grid.less" />
+    <Content Include="content\bootstrap\hero-unit.less" />
+    <Content Include="content\bootstrap\labels-badges.less" />
+    <Content Include="content\bootstrap\layouts.less" />
+    <Content Include="content\bootstrap\media.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\alerts.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\breadcrumbs.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\button-groups.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\buttons.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\checkbox.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\code.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\dropdowns.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\forms.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\hero-unit.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\icons.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\labels-badges.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\metro-bootstrap.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\navbar.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\navs.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\pager.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\pagination.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\progress-bars.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\radio.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\thumbnails.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\tiles.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\type.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\variables.less" />
+    <Content Include="content\bootstrap\metro-bootstrap\wells.less" />
+    <Content Include="content\bootstrap\mixins.less" />
+    <Content Include="content\bootstrap\modals.less" />
+    <Content Include="content\bootstrap\navbar.less" />
+    <Content Include="content\bootstrap\navs.less" />
+    <Content Include="content\bootstrap\pager.less" />
+    <Content Include="content\bootstrap\pagination.less" />
+    <Content Include="content\bootstrap\popovers.less" />
+    <Content Include="content\bootstrap\progress-bars.less" />
+    <Content Include="content\bootstrap\reset.less" />
+    <Content Include="content\bootstrap\responsive-1200px-min.less" />
+    <Content Include="content\bootstrap\responsive-767px-max.less" />
+    <Content Include="content\bootstrap\responsive-768px-979px.less" />
+    <Content Include="content\bootstrap\responsive-navbar.less" />
+    <Content Include="content\bootstrap\responsive-utilities.less" />
+    <Content Include="content\bootstrap\responsive.less" />
+    <Content Include="content\bootstrap\scaffolding.less" />
+    <Content Include="content\bootstrap\sprites.less" />
+    <Content Include="content\bootstrap\tables.less" />
+    <Content Include="content\bootstrap\thumbnails.less" />
+    <Content Include="content\bootstrap\tooltip.less" />
+    <Content Include="content\bootstrap\type.less" />
+    <Content Include="content\bootstrap\utilities.less" />
+    <Content Include="content\bootstrap\variables.less" />
+    <Content Include="content\bootstrap\wells.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="content\css\main.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

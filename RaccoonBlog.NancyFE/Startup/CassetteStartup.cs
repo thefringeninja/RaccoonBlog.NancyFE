@@ -244,9 +244,25 @@ namespace RaccoonBlog.NancyFE.Startup
                 return urlModifier.Modify(cassetteHandlerPrefix + "file" + (startIndex < 0 ? str + "-" + hash : str.Insert(startIndex, "-" + hash)));
             }
 
+            public string CreateRawFileUrl(string filename)
+            {
+                if (!filename.StartsWith("~"))
+                    throw new ArgumentException("Image filename must be application relative (starting with '~').");
+                var str = ConvertToForwardSlashes(filename).Substring(1);
+                return urlModifier.Modify(cassetteHandlerPrefix + "file" + str);
+            }
+
             public string CreateAbsolutePathUrl(string applicationRelativePath)
             {
                 return urlModifier.Modify(applicationRelativePath.TrimStart('~', '/'));
+            }
+
+            public string CreateCachedFileUrl(string filename)
+            {
+                if (!filename.StartsWith("~"))
+                    throw new ArgumentException("Image filename must be application relative (starting with '~').");
+                var str = ConvertToForwardSlashes(filename).Substring(1);
+                return urlModifier.Modify(cassetteHandlerPrefix + "file" + str);
             }
 
             #endregion
