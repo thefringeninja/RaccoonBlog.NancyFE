@@ -10,7 +10,7 @@ namespace RaccoonBlog.NancyFE.Model
         public static IRavenQueryable<Post> Current(this IRavenQueryable<Post> posts)
         {
             return from post in posts.Customize(IncludeUsers)
-                   orderby post.PublishAt
+                   orderby post.PublishAt descending 
                    where false == post.IsDeleted
                          && post.PublishAt <= DateTime.UtcNow
                    select post;
