@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
-using System.Web;
 using Cassette;
 using Nancy;
 using Nancy.Responses;
@@ -69,7 +68,7 @@ namespace RaccoonBlog.NancyFE.Modules
                     return HandleResourceRequest(() => File.OpenRead(filePath), MimeTypes.GetMimeType(filePath), hash);
                 };
 
-            Get["/{bundleType}/{id}=/{path}"]
+            Get["/{bundleType}/{id}/{path*}"]
                 = p =>
                 {
                     var path = "~/" + (String)p.path;

@@ -11,6 +11,7 @@ using Cassette.IO;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
+using RaccoonBlog.NancyFE.Helpers;
 using IsolatedStorageFile = System.IO.IsolatedStorage.IsolatedStorageFile;
 using TinyIoCContainer = Cassette.TinyIoC.TinyIoCContainer;
 
@@ -18,8 +19,13 @@ namespace RaccoonBlog.NancyFE.Startup
 {
     public class CassetteStartup : HostBase, IApplicationStartup, IProvideBundleCollections
     {
+        public const string BUNDLES_HELPER = "Cassette.BundlesHelper";
         private readonly Nancy.TinyIoc.TinyIoCContainer nancyContainer;
         private readonly IRootPathProvider rootPathProvider;
+        private TinyIoCContainer casseteContainer
+        {
+            get { return Container; }
+        }
 
         static CassetteStartup()
         {
@@ -30,6 +36,7 @@ namespace RaccoonBlog.NancyFE.Startup
         {
             this.rootPathProvider = rootPathProvider;
             this.nancyContainer = nancyContainer;
+
             AppDomainAssemblyTypeScanner.LoadAssemblies("Cassette.CoffeeScript.dll");
             AppDomainAssemblyTypeScanner.LoadAssemblies("Cassette.Hogan.dll");
             AppDomainAssemblyTypeScanner.LoadAssemblies("Cassette.JQueryTmpl.dll");
@@ -53,7 +60,15 @@ namespace RaccoonBlog.NancyFE.Startup
         public void Initialize(IPipelines pipelines)
         {
             Initialize();
-            //pipelines.AfterRequest.AddItemToEndOfPipeline(RewriteResponseContents);
+            pipelines.BeforeRequest.AddItemToStartOfPipeline(IncludeBundlesHelper);
+        }
+
+        private Response IncludeBundlesHelper(NancyContext context)
+        {
+            context.Items[BUNDLES_HELPER] = new BundlesHelper(
+                casseteContainer.Resolve<IReferenceBuilder>(),
+                casseteContainer.Resolve<IPlaceholderTracker>());
+            return null;
         }
 
         #endregion
@@ -62,36 +77,10 @@ namespace RaccoonBlog.NancyFE.Startup
 
         BundleCollection IProvideBundleCollections.Provide()
         {
-            return Container.Resolve<BundleCollection>();
+            return casseteContainer.Resolve<BundleCollection>();
         }
 
         #endregion
-
-        public void RewriteResponseContents(NancyContext context)
-        {
-            if (false == context.Response.ContentType.Equals("text/html"))
-            {
-                // Only html needs to be (possibly) rewritten
-                return;
-            }
-            var currentContents = context.Response.Contents;
-            context.Response.Contents =
-                    stream =>
-                    {
-                        var placeholderTracker = Container.Resolve<IPlaceholderTracker>();
-
-                        var currentContentsStream = new MemoryStream();
-                        currentContents(currentContentsStream);
-                        var reader = new StreamReader(currentContentsStream);
-
-                        reader.BaseStream.Seek(0, SeekOrigin.Begin);
-                        var writer = new StreamWriter(stream);
-
-                        writer.Write(placeholderTracker.ReplacePlaceholders(reader.ReadToEnd()));
-
-                        writer.Flush();
-                    };
-        }
 
         protected override IEnumerable<Assembly> LoadAssemblies()
         {
@@ -112,13 +101,17 @@ namespace RaccoonBlog.NancyFE.Startup
         {
             base.ConfigureContainer();
 
-            Container.Register(rootPathProvider);
-            Container.Register<IUrlModifier>((container, _) => new UrlModifier());
-            Container.Register<IUrlGenerator>((container, _) => new UrlGenerator(container.Resolve<IUrlModifier>(), ModulePath + "/"));
+            casseteContainer.Register(rootPathProvider);
+            casseteContainer.Register<IUrlModifier>((container, _) => new UrlModifier());
+            casseteContainer.Register<IUrlGenerator>((container, _) => new UrlGenerator(container.Resolve<IUrlModifier>(), ModulePath + "/"));
 
             nancyContainer.Register(ResolveFromCassetteContainer<IFileSearchProvider>());
             nancyContainer.Register(ResolveFromCassetteContainer<IBundleFactoryProvider>());
             nancyContainer.Register(ResolveFromCassetteContainer<CassetteSettings>());
+            nancyContainer.Register(ResolveFromCassetteContainer<BundleCollection>());
+            nancyContainer.Register(ResolveFromCassetteContainer<IPlaceholderTracker>());
+            nancyContainer.Register(ResolveFromCassetteContainer<BundleCollection>());
+
             nancyContainer.Register<IProvideBundleCollections>(this);
         }
 
@@ -128,7 +121,7 @@ namespace RaccoonBlog.NancyFE.Startup
                 TRegisterType
                 > ResolveFromCassetteContainer<TRegisterType>() where TRegisterType : class
         {
-            return (_, __) => Container.Resolve<TRegisterType>();
+            return (_, __) => casseteContainer.Resolve<TRegisterType>();
         }
 
         #region Nested type: CassetteConfiguration

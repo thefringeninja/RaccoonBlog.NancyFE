@@ -1,8 +1,6 @@
-﻿using Nancy.ViewEngines.Razor;
-
-namespace RaccoonBlog.NancyFE
+﻿namespace RaccoonBlog.NancyFE
 {
-    public abstract class RazorView<TModel> : NancyRazorViewBase<TModel>
+    public abstract class RazorView<TModel> : RazorViewBase<TModel>
     {
         protected RazorView()
         {

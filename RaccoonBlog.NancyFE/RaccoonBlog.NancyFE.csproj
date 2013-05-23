@@ -54,9 +54,6 @@
     <Reference Include="Cassette">
       <HintPath>..\packages\Cassette.2.0.0\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.Nancy">
-      <HintPath>..\packages\Cassette.Nancy.2.0.0\lib\net40\Cassette.Nancy.dll</HintPath>
-    </Reference>
     <Reference Include="Cassette.Sass">
       <HintPath>..\packages\Cassette.Sass.2.0.0\lib\net40-client\Cassette.Sass.dll</HintPath>
     </Reference>
@@ -123,6 +120,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CassetteBundleConfiguration.cs" />
+    <Compile Include="Helpers\BundlesHelper.cs" />
+    <Compile Include="Helpers\IBundlesHelper.cs" />
     <Compile Include="Model\BlogConfig.cs" />
     <Compile Include="RavenStoreExtensions.cs" />
     <Compile Include="Inflector.cs" />
@@ -132,6 +131,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Modules\CassetteModule.cs" />
     <Compile Include="Model\QueryExtensions.cs" />
+    <Compile Include="RazorViewBase.cs" />
     <Compile Include="Startup\CassetteStartup.cs" />
     <Compile Include="IProvideBundleCollections.cs" />
     <Compile Include="ViewModels\BlogPostSummaryViewModel.cs" />
