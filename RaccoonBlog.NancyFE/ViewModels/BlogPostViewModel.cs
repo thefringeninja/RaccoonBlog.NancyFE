@@ -11,7 +11,7 @@ namespace RaccoonBlog.NancyFE.ViewModels
         {
             Body = post.Body;
             PublishAt = post.PublishAt;
-            Title = post.Title;
+            PostTitle = post.Title;
             Author = author.TwitterNick;
             this.blogConfig = blogConfig;
         }
@@ -21,9 +21,14 @@ namespace RaccoonBlog.NancyFE.ViewModels
 
         public string Author { get; set; }
 
+        public string PostTitle { get; private set; }
+
         #region IPageLayout Members
 
-        public string Title { get; private set; }
+        string IPageLayout.Title
+        {
+            get { return blogConfig.Title + " - " + PostTitle; }
+        }
 
         string IPageLayout.Subtitle
         {

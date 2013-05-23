@@ -8,18 +8,13 @@
         <title>@Model.Title</title>
         <meta name="description" content="@Model.Description"/>
         @Bundles.RenderStylesheets()        
-        <style type="text/css">
-            body {
-                margin: 12px;
-            }
-
-            body * { background-color: white; }
-        </style>
     </head>
-    <body class="blackbg">
-        <section class="whitebg" style="padding: 12px">
+    <body>
+        <section class="container" >
             <section>
-                <header><h1 class="black">@Model.Subtitle</h1></header>
+                <header>
+                    <h1><a href="~/">@Model.Subtitle</a></h1>
+                </header>
                 @RenderBody()
                 <footer>
                     <small>&copy; @Model.Copyright</small>
