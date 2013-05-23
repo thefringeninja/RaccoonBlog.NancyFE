@@ -1,0 +1,13 @@
+﻿@inherits RaccoonBlog.NancyFE.RazorViewBase<System.Collections.Generic.IEnumerable<RaccoonBlog.NancyFE.ViewModels.TagViewModel>>
+@{
+    Bundles.Reference("~/scripts/app/taglist.coffee");
+}
+
+
+<canvas id="tag_cloud"></canvas>
+<ul id="tags">
+    @foreach (var tag in Model)
+    {
+        <li><a data-weight="@tag.Weight" href="~/tagged/@tag.Slug">@tag.Name</a> (@tag.Weight)</li>
+    }
+</ul>

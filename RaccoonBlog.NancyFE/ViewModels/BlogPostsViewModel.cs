@@ -11,12 +11,13 @@ namespace RaccoonBlog.NancyFE.ViewModels
         private readonly BlogConfig blogConfig;
         private readonly IEnumerable<BlogPostSummaryViewModel> blogPosts;
 
-        public BlogPostsViewModel(IEnumerable<Post> posts, BlogConfig blogConfig, Func<Post, User> getAuthorOfPost)
+        public BlogPostsViewModel(IEnumerable<Post> posts, IEnumerable<Tag> tags, BlogConfig blogConfig, Func<Post, User> getAuthorOfPost)
         {
             this.blogConfig = blogConfig;
             blogPosts = (from post in posts
                          select new BlogPostSummaryViewModel(post, getAuthorOfPost(post)))
                 .ToList();
+            Tags = tags.Select(tag => new TagViewModel(tag)).ToList();
         }
 
         #region IEnumerable<BlogPostSummaryViewModel> Members
@@ -54,6 +55,8 @@ namespace RaccoonBlog.NancyFE.ViewModels
         {
             get { return blogConfig.MetaDescription; }
         }
+
+        public IEnumerable<TagViewModel> Tags { get; private set; }
 
         #endregion
     }

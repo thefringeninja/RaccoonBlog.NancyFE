@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Nancy;
 using Nancy.Responses;
@@ -47,7 +48,7 @@ namespace RaccoonBlog.NancyFE.Modules
                     return 404;
                 }
 
-                return View[new BlogPostsViewModel(posts, GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId))];
+                return View[new BlogPostsViewModel(posts, GetTags(session), GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId))];
             };
 
             Get["/tagged/{tag}"] = p =>
@@ -56,7 +57,8 @@ namespace RaccoonBlog.NancyFE.Modules
                                    .Tagged((string) p.tag)
                                    .Take(PageSize)
                                    .ToArray();
-                return View[new BlogPostsViewModel(posts, GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId))];
+
+                return View[new BlogPostsViewModel(posts, GetTags(session), GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId))];
             };
 
             Get["/{id}/{slug}"] = p =>
@@ -93,6 +95,14 @@ namespace RaccoonBlog.NancyFE.Modules
                 
                 return View[new BlogPostViewModel(post, author, GetBlogConfig())];
             };
+        }
+
+        private static List<Tag> GetTags(IDocumentSession session)
+        {
+            var tags = session.Query<Tag>("Tags/Count", true)
+                              .OrderBy(tag => tag.Count)
+                              .ToList();
+            return tags;
         }
     }
 }

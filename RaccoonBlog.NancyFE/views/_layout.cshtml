@@ -1,17 +1,18 @@
 ﻿@inherits RaccoonBlog.NancyFE.RazorViewBase<RaccoonBlog.NancyFE.ViewModels.IPageLayout>
 @{
     Bundles.Reference("~/content/css/main.less");
-}              
+}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>@Model.Title</title>
-        <meta name="description" content="@Model.Description"/>
-        @Bundles.RenderStylesheets()        
-    </head>
-    <body>
-        <section class="container" >
-            <section>
+<head>
+    <title>@Model.Title</title>
+    <meta name="description" content="@Model.Description"/>
+    @Bundles.RenderStylesheets()
+</head>
+<body>
+    <section class="container">
+        <div class="row">
+            <section class="span8">
                 <header>
                     <h1><a href="~/">@Model.Subtitle</a></h1>
                 </header>
@@ -20,6 +21,11 @@
                     <small>&copy; @Model.Copyright</small>
                 </footer>
             </section>
-        </section>
-    </body>
+            <aside class="span4">
+                @RenderSection("sidebar", false)
+            </aside>
+        </div>
+    </section>
+    @Bundles.RenderScripts()
+</body>
 </html>

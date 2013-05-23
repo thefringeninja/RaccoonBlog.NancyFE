@@ -129,6 +129,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\lib\jquery.tagcanvas\bundle.txt" />
+    <Content Include="scripts\lib\jquery\bundle.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +138,7 @@
     <Compile Include="Helpers\BundlesHelper.cs" />
     <Compile Include="Helpers\IBundlesHelper.cs" />
     <Compile Include="Model\BlogConfig.cs" />
+    <Compile Include="Model\Tag.cs" />
     <Compile Include="RavenStoreExtensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="HexExtensions.cs" />
@@ -156,6 +159,7 @@
     <Compile Include="ViewModels\BlogPostViewModel.cs" />
     <Compile Include="Model\Post.cs" />
     <Compile Include="ViewModels\IPageLayout.cs" />
+    <Compile Include="ViewModels\TagViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="views\_layout.cshtml" />
@@ -237,7 +241,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="content\css\main.less" />
+    <Content Include="scripts\lib\jquery.tagcanvas\jquery.tagcanvas.js" />
+    <Content Include="scripts\app\taglist.coffee" />
+    <Content Include="views\shared\TagList.cshtml" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -37,3 +37,4 @@ bin/
 *DotSettings.user
 _UpgradeReport_Files/
 Backup/
+*/scripts/app/*.js

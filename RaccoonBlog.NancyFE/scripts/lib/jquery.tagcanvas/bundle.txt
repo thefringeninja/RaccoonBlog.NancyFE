@@ -1,0 +1,4 @@
+﻿jquery.tagcanvas.js
+
+[references]
+~/scripts/lib/jquery

@@ -11,11 +11,15 @@ namespace RaccoonBlog.NancyFE
     {
         public void Configure(BundleCollection bundles)
         {
-            bundles.Add<StylesheetBundle>("content/bootstrap/metro-bootstrap", new[] { "metro-bootstrap.less" });
-            bundles.Add<StylesheetBundle>("content/bootstrap", new[] { "bootstrap.less" });
+            bundles.Add<StylesheetBundle>("content/bootstrap/metro-bootstrap", new[] {"metro-bootstrap.less"});
+            bundles.Add<StylesheetBundle>("content/bootstrap", new[] {"bootstrap.less"});
+            bundles.Add<StylesheetBundle>("content/css", new[] {"main.less"});
 
-            bundles.Add<StylesheetBundle>("content/css", new[] { "main.less" });
-            
+            bundles.AddPerIndividualFile<ScriptBundle>("scripts/app", new FileSearch
+            {
+                Pattern = "*.coffee"
+            });
+            bundles.AddPerSubDirectory<ScriptBundle>("scripts/lib");
         }
     }
 }

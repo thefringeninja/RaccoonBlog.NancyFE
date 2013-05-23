@@ -1,5 +1,7 @@
 ﻿@inherits RaccoonBlog.NancyFE.RazorView<RaccoonBlog.NancyFE.ViewModels.BlogPostsViewModel>
-
+@{
+    Bundles.Reference("~/scripts/app/taglist.coffee");
+}
 @foreach (var post in Model)
 {
     <article>
@@ -11,4 +13,7 @@
         @Html.Raw(post.Body)
     </article>
     <hr />
+}
+@section sidebar {
+    @Html.Partial("shared/TagList", Model.Tags)
 }
