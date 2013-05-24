@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Nancy;
 using Nancy.Responses;
+using Nancy.Responses.Negotiation;
 using RaccoonBlog.NancyFE.Model;
 using RaccoonBlog.NancyFE.ViewModels;
 using Raven.Client;
@@ -25,6 +26,7 @@ namespace RaccoonBlog.NancyFE.Modules
 
         public DefaultModule(IDocumentSession session)
         {
+            After.AddItemToEndOfPipeline(CacheIfRss);
             this.session = session;
             // 10 most recent blog posts
             Get["/"] = _ =>
@@ -48,7 +50,9 @@ namespace RaccoonBlog.NancyFE.Modules
                     return 404;
                 }
 
-                return View[new BlogPostsViewModel(posts, GetTags(session), GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId))];
+                var viewModel = new BlogPostsViewModel(posts, GetTags(session), GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId));
+
+                return Negotiate.WithModel(viewModel);
             };
 
             Get["/tagged/{tag}"] = p =>
@@ -58,7 +62,9 @@ namespace RaccoonBlog.NancyFE.Modules
                                    .Take(PageSize)
                                    .ToArray();
 
-                return View[new BlogPostsViewModel(posts, GetTags(session), GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId))];
+                var viewModel = new BlogPostsViewModel(posts, GetTags(session), GetBlogConfig(), post => session.LoadIncluded<User>(post.AuthorId));
+
+                return Negotiate.WithModel(viewModel);
             };
 
             Get["/{id}/{slug}"] = p =>
@@ -92,9 +98,22 @@ namespace RaccoonBlog.NancyFE.Modules
                 }
 
                 var author = session.LoadIncluded<User>(post.AuthorId);
-                
-                return View[new BlogPostViewModel(post, author, GetBlogConfig())];
+
+                var viewModel = new BlogPostViewModel(post, author, GetBlogConfig());
+
+                return Negotiate.WithModel(viewModel);
             };
+        }
+
+        private static void CacheIfRss(NancyContext context)
+        {
+            if (false == MediaRange.FromString("application/rss+xml").Matches(context.Response.ContentType))
+                return;
+            var expires = DateTime.UtcNow.AddDays(1);
+
+            context.Response
+                   .WithHeader("Expires", expires.ToString("r"))
+                   .WithHeader("Cache-Control", "public, max-age=86400");
         }
 
         private static List<Tag> GetTags(IDocumentSession session)

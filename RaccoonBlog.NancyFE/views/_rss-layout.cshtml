@@ -1,0 +1,12 @@
+﻿@using RaccoonBlog.NancyFE.ViewModels
+@inherits RaccoonBlog.NancyFE.RazorViewBase<IPageLayout>
+<?xml version="1.0" ?>
+<rss version="2.0">
+    <channel>
+        <title>@Model.Title - @Model.Subtitle</title>
+        <description>@Model.Description</description>
+        <copyright>@Model.Copyright</copyright>
+        @RenderBody()
+    </channel>
+
+</rss>

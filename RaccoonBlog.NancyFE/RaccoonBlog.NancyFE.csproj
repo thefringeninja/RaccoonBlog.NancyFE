@@ -141,6 +141,7 @@
     <Compile Include="Helpers\IBundlesHelper.cs" />
     <Compile Include="Model\BlogConfig.cs" />
     <Compile Include="Model\Tag.cs" />
+    <Compile Include="Negotiation\RssResponseProcessor.cs" />
     <Compile Include="RavenStoreExtensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="HexExtensions.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Modules\CassetteModule.cs" />
     <Compile Include="Model\QueryExtensions.cs" />
+    <Compile Include="RazorRssView.cs" />
     <Compile Include="RazorViewBase.cs" />
     <Compile Include="Startup\CassetteStartup.cs" />
     <Compile Include="IProvideBundleCollections.cs" />
@@ -246,6 +248,8 @@
     <Content Include="scripts\lib\jquery.tagcanvas\jquery.tagcanvas.js" />
     <Content Include="scripts\app\taglist.coffee" />
     <Content Include="views\shared\TagList.cshtml" />
+    <Content Include="views\rss\BlogPostsView.cshtml" />
+    <Content Include="views\_rss-layout.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
