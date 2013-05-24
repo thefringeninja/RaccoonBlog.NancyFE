@@ -1,0 +1,4 @@
+﻿jquery.timeago.js
+
+[references]
+~/scripts/lib/jquery

@@ -15,6 +15,7 @@ namespace RaccoonBlog.NancyFE.Helpers
         {
             this.referenceBuilder = referenceBuilder;
             this.placeholderTracker = placeholderTracker;
+            
         }
 
         #region IBundlesHelper Members
@@ -32,6 +33,15 @@ namespace RaccoonBlog.NancyFE.Helpers
         public IHtmlString RenderStylesheets(string pageLocation = null)
         {
             return Render<StylesheetBundle>();
+        }
+        public void AddInlineScript(Func<object, object> scriptContent, string pageLocation = null)
+        {
+            AddInlineScript(scriptContent(null).ToString(), pageLocation);
+        }
+        public void AddInlineScript(string scriptContent, string pageLocation = null)
+        {
+            var script = new InlineScriptBundle(scriptContent);
+            referenceBuilder.Reference(script, pageLocation);
         }
 
         public string FileUrl(string bundlePath)

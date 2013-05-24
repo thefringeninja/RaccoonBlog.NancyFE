@@ -130,6 +130,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\lib\jquery.tagcanvas\bundle.txt" />
+    <Content Include="scripts\lib\jquery.timeago\bundle.txt" />
+    <Content Include="scripts\lib\jquery.timeago\jquery.timeago.js" />
     <Content Include="scripts\lib\jquery\bundle.txt" />
     <Content Include="Web.config" />
   </ItemGroup>

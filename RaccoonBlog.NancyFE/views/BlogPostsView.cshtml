@@ -1,6 +1,13 @@
 ﻿@inherits RaccoonBlog.NancyFE.RazorView<RaccoonBlog.NancyFE.ViewModels.BlogPostsViewModel>
 @{
     Bundles.Reference("~/scripts/app/taglist.coffee");
+    Bundles.Reference("~/scripts/lib/jquery.timeago");
+    Bundles.AddInlineScript(
+        @<script>
+             (function ($) {
+                 $("time").timeago();
+             })(window.jQuery);
+         </script>);
 }
 @foreach (var post in Model)
 {
@@ -14,6 +21,7 @@
     </article>
     <hr />
 }
+
 @section sidebar {
     @Html.Partial("shared/TagList", Model.Tags)
 }

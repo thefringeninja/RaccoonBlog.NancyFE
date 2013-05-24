@@ -1,4 +1,14 @@
 ﻿@inherits RaccoonBlog.NancyFE.RazorView<RaccoonBlog.NancyFE.ViewModels.BlogPostViewModel>
+@{
+    Bundles.Reference("~/scripts/app/taglist.coffee");
+    Bundles.Reference("~/scripts/lib/jquery.timeago");
+    Bundles.AddInlineScript(
+        @<script>
+             (function ($) {
+                 $("time").timeago();
+             })(window.jQuery);
+         </script>);
+}
 <article>
     <header>
         <h2>@Model.PostTitle</h2>

@@ -1,3 +1,4 @@
+using System;
 using Nancy.ViewEngines.Razor;
 
 namespace RaccoonBlog.NancyFE.Helpers
@@ -11,5 +12,7 @@ namespace RaccoonBlog.NancyFE.Helpers
         IHtmlString RenderStylesheets(string pageLocation = null);
 
         string FileUrl(string bundlePath);
+        void AddInlineScript(string scriptContent, string pageLocation = null);
+        void AddInlineScript(Func<object, object> scriptContent, string pageLocation = null);
     }
 }
