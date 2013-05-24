@@ -99,10 +99,13 @@ namespace RaccoonBlog.NancyFE.Modules
 
         private static List<Tag> GetTags(IDocumentSession session)
         {
-            var tags = session.Query<Tag>("Tags/Count", true)
-                              .OrderBy(tag => tag.Count)
-                              .ToList();
-            return tags;
+            using (session.Advanced.DocumentStore.AggressivelyCacheFor(TimeSpan.FromMinutes(30)))
+            {
+                var tags = session.Query<Tag>("Tags/Count", true)
+                                  .OrderBy(tag => tag.Count)
+                                  .ToList();
+                return tags;
+            }
         }
     }
 }
